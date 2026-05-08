@@ -17,7 +17,8 @@ const URLS = {
   linux_universal: 'https://static-download8.chaterm.net/chaterm-latest-cn-linux-x86_64.AppImage',
 
   apple: 'https://apps.apple.com/cn/app/id6753935895',
-  android: 'https://static-download8.chaterm.net/chaterm-latest-cn-android.apk'
+  android: 'https://static-download8.chaterm.net/chaterm-latest-cn-android.apk',
+  harmony: 'https://appgallery.huawei.com/app/detail?id=com.intsig.chaterm'
 }
 
 function detectOS() {
@@ -30,6 +31,7 @@ function detectOS() {
     if (p.includes('android')) return 'Android'
     if (p.includes('ios')) return 'iOS'
   }
+  if (/harmonyos/i.test(ua) && !/android/i.test(ua)) return 'HarmonyOS'
   if (/android/i.test(ua)) return 'Android'
 
   const isIPad =
@@ -73,6 +75,10 @@ async function pickDownloadTarget() {
     const arch = await detectMacArch()
     if (arch === 'x64') return { label: 'macOS (Intel)', url: URLS.mac_x64 }
     return { label: 'macOS (Apple Silicon)', url: URLS.mac_arm }
+  }
+
+  if (os === 'HarmonyOS') {
+    return { label: 'HarmonyOS', url: URLS.harmony }
   }
 
   if (os === 'Android') {

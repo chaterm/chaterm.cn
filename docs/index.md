@@ -653,6 +653,10 @@ hero:
            <img src="/images/android.svg">
           <span>Android</span>
         </a>
+        <a class="env-badge"  href="/download/" >
+           <img src="/images/harmonyos.svg">
+          <span>HarmonyOS</span>
+        </a>
       </div>
       <!-- <video
         class="rounded-xl"
